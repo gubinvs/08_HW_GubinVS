@@ -1,0 +1,13 @@
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\bin\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.exe
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\bin\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.deps.json
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\bin\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.runtimeconfig.json
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\bin\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.runtimeconfig.dev.json
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\bin\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.dll
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\bin\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.pdb
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\obj\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.csprojAssemblyReference.cache
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\obj\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.AssemblyInfoInputs.cache
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\obj\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.AssemblyInfo.cs
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\obj\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.csproj.CoreCompileInputs.cache
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\obj\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.dll
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\obj\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.pdb
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\obj\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.genruntimeconfig.cache
