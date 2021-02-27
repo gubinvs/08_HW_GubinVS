@@ -10,11 +10,11 @@
         "projectUniqueName": "C:\\08_HW_GubinVS_2.0\\08_HW_GubinVS-2.0\\08_HW_GubinVS-2.0.csproj",
         "projectName": "08_HW_GubinVS-2.0",
         "projectPath": "C:\\08_HW_GubinVS_2.0\\08_HW_GubinVS-2.0\\08_HW_GubinVS-2.0.csproj",
-        "packagesPath": "C:\\Users\\Владимир\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\gubinvs\\.nuget\\packages\\",
         "outputPath": "C:\\08_HW_GubinVS_2.0\\08_HW_GubinVS-2.0\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Владимир\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gubinvs\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
