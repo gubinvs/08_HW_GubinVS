@@ -112,16 +112,16 @@ namespace _08_HW_GubinVS_2._0
             //    switch (Convert.ToInt32(Console.ReadLine()))
             //    {
             //        case 1:
-                        Console.WriteLine("Режим формирования данных рандомным способом");
-                        RandomCreate(AddPath(), AddIntWorker());
+            //          Console.WriteLine("Режим формирования данных рандомным способом");
+            //         RandomCreate(AddPath(), AddIntWorker());
             //            break;
             //        case 2:
             //            Console.WriteLine("Режим добавления данных из консоли");
-            //            Create(AddPath());
+            //          Create(AddPath());
             //            break;
             //        case 3:
             //            Console.WriteLine("Режим удаления данных");
-            //            Delete(AddPath());
+                        Delete(AddPath());
             //            break;
             //        case 4:
             //            Console.WriteLine("Режим редактирования данных");
@@ -357,12 +357,11 @@ namespace _08_HW_GubinVS_2._0
         private static void Create(string path)
         {
             Company newcom = DeserializeXML(path);
+            
             // Печать данных сериализации в консоль
             newcom.PrintCompany();
             // Добавление нового сотрудника данными введенными с консоли
-            //newcom.AddDataConsoleCompany();
-            // Перерасчет поля QuentityWorker и заполнение данных полей новыми данными
-            //newcom.EditQuentityWorker();
+            newcom.AddWorker(Worker());
             // Печать обновленных данных в консоль
             newcom.PrintCompany();
             // Сериализация новых данных в файлы xml и jason
@@ -429,6 +428,33 @@ namespace _08_HW_GubinVS_2._0
             {
                 xml.Serialize(str, com);
             }
+        }
+
+        /// <summary>
+        /// Метод добавления сотрудника данными введенными с консоли
+        /// </summary>
+        private static Worker Worker()
+        {
+            Worker w = new Worker();
+            Console.WriteLine("Введите наименование департамента");
+            w.DepartamentName = Console.ReadLine();
+
+            Console.WriteLine("Введите фамилию сотрудника");
+            w.SurName = Console.ReadLine();
+
+            Console.WriteLine("Введите имя сотрудника");
+            w.Name = Console.ReadLine();
+
+            Console.WriteLine("Введите возраст сотрудника");
+            w.Age = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Введите размер оплаты труда сотрудника");
+            w.Salary = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Введите количество проектов у сотрудника");
+            w.QuantityProjects = Convert.ToInt32(Console.ReadLine());
+
+            return w;
         }
     }
 }

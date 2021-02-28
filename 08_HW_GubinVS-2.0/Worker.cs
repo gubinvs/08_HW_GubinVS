@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace _08_HW_GubinVS_2._0
-{[Serializable]
+{
+    [Serializable]
 
-    class Worker
+    public class Worker
     {
         /// <summary>
         /// Номер по порядку
@@ -49,6 +50,8 @@ namespace _08_HW_GubinVS_2._0
         public Guid WorkerId { get; set; }
 
 
-        public Worker() { }
+        public Worker() 
+        { 
+        }
     }
 }

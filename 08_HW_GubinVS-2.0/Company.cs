@@ -4,9 +4,10 @@ using System.Text;
 using System.Linq;
 
 namespace _08_HW_GubinVS_2._0
-{[Serializable]
+{
+    [Serializable]
 
-    class Company
+    public class Company
     {
         /// <summary>
         /// Колллекция департаментов
@@ -26,7 +27,6 @@ namespace _08_HW_GubinVS_2._0
             this.Workers = new List<Worker>();
         }
 
-
         /// <summary>
         /// Метод принимает два массива с информацией о сотруднике и добавляет данные в коллекцию
         /// </summary>
@@ -41,6 +41,48 @@ namespace _08_HW_GubinVS_2._0
                         a[2]  // Количество проектов у сотрудника
                 );
  
+        }
+
+        /// <summary>
+        /// Метод добавляет в базу нового сотрудника принимая заполненную структуру Worker.
+        /// </summary>
+        public void AddWorker(Worker worker)
+        {
+            // если такой департамент есть в базе, добавляется сотрудник, если нет добавляется департамент
+            if (ChekDepName(worker.DepartamentName))
+            {
+                this.Workers.Add(new Worker()
+                {
+                    Number = this.Workers.Count + 1,
+                    DepartamentName = worker.DepartamentName,
+                    SurName = worker.SurName,
+                    Name = worker.Name,
+                    Age = worker.Age,
+                    Salary = worker.Salary,
+                    QuantityProjects = worker.QuantityProjects,
+                    WorkerId = Guid.NewGuid()
+                }
+                );
+
+            }
+            else
+            {
+                Random ran = new Random();
+                this.Departaments.Add(
+                    new Departament()
+                    {
+                        DepartamentName = worker.DepartamentName,
+                        Date = new DateTime(ran.Next(2000, 2020), ran.Next(1, 12), ran.Next(28))
+                    });
+                this.AddWorker(
+                    worker.DepartamentName, 
+                    worker.SurName, 
+                    worker.Name, 
+                    worker.Age, 
+                    worker.Salary,
+                    worker.QuantityProjects
+                    );
+            }
         }
 
         /// <summary>

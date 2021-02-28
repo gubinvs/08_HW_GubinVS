@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace _08_HW_GubinVS_2._0
-{[Serializable]
+{
+    [Serializable]
 
-    class Departament
+    public class Departament
     {
         /// <summary>
         /// Наименование департамента
@@ -26,7 +27,9 @@ namespace _08_HW_GubinVS_2._0
         public int QuentityWorker { get; set; }
 
 
-        public Departament() { }
+        public Departament() 
+        { 
+        }
 
 
     }
