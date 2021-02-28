@@ -11,3 +11,5 @@ C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\obj\Debug\netcoreapp3.1\08_HW_GubinVS-2.0
 C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\obj\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.dll
 C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\obj\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.pdb
 C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\obj\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.genruntimeconfig.cache
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\08_HW_GubinVS_2.0\08_HW_GubinVS-2.0\obj\Debug\netcoreapp3.1\08_HW_GubinVS-2.0.csproj.CopyComplete

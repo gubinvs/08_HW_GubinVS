@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Text;
 
 namespace _08_HW_GubinVS_2._0
-{
-    [Serializable]
+{[Serializable]
+
     class Worker
     {
+        /// <summary>
+        /// Номер по порядку
+        /// </summary>
+        public int Number { get; set; }
+
         /// <summary>
         /// Фамилия сотрудника
         /// </summary>

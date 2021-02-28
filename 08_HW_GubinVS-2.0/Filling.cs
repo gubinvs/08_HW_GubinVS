@@ -91,6 +91,38 @@ namespace _08_HW_GubinVS_2._0
 
         }
 
+        /// <summary>
+        /// Метод возвращяет массив из Наименование департамента, фамилии сотрудника, имени сотрудника
+        /// </summary>
+        /// <returns></returns>
+        public string[] StringWorker()
+        {
+            string[] w = new string[3];
+
+            w[0] = AddDepartamentName(); // Наименование департамента
+            w[1] = AddSurName(); //  Фамилия сотрудника
+            w[2] = AddName(); // Имя сотрудника
+
+            return w;
+        }
+
+        /// <summary>
+        /// Метод возвращает заполненный массив с возрастом сотрудника, зарплатой и количеством куррируемых проектов
+        /// </summary>
+        /// <returns></returns>
+        public int[] IntWorker()
+        {
+            Random r = new Random();
+            int[] w = new int[3];
+            w[0] = r.Next(18, 65); // Возрвст сотрудника
+            w[1] = r.Next(15000, 150000); // Зарплата сотрудника
+            w[2] = r.Next(10); // Количество проектов сотрудника
+
+            return w;
+        
+        }
+
+
 
         /// <summary>
         /// Возвращает случайно подобранное из массива имя сотрудника
@@ -101,7 +133,6 @@ namespace _08_HW_GubinVS_2._0
             string name = Filling.name[Filling.random.Next(Filling.name.Length)].ToString();
             return name;
         }
-
 
         /// <summary>
         /// Возвращает случайно подобранное из массива фамилию сотрудника

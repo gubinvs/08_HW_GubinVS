@@ -4,8 +4,8 @@ using System.Text;
 using System.Linq;
 
 namespace _08_HW_GubinVS_2._0
-{
-    [Serializable]
+{[Serializable]
+
     class Company
     {
         /// <summary>
@@ -28,16 +28,33 @@ namespace _08_HW_GubinVS_2._0
 
 
         /// <summary>
+        /// Метод принимает два массива с информацией о сотруднике и добавляет данные в коллекцию
+        /// </summary>
+        public void AddRandomWorker(string[] n, int[] a)
+        {
+            AddWorker(
+                        n[0], // Наименование департамента
+                        n[1], // Фамилия сотрудника
+                        n[2], // Имя сотрудника
+                        a[0], // Возраст сотрудника
+                        a[1], // Зарплата сотрудника
+                        a[2]  // Количество проектов у сотрудника
+                );
+ 
+        }
+
+        /// <summary>
         /// Метод принимает кол-во сотрудников которых необходимо создать.
         /// </summary>
         /// <param name="depname">Наименование департамента</param>
         public void AddWorker(string depname, string surname, string name, int age, int salary, int progects)
         {
-            // если такой департамент есть в базе, добавляем воркера, если нет предлагаем добавить департамент
+            // если такой департамент есть в базе, добавляется сотрудник, если нет добавляется департамент
             if (ChekDepName(depname)) 
             {
                 this.Workers.Add(new Worker() 
                         {
+                            Number = this.Workers.Count+1,
                             DepartamentName = depname,
                             SurName = surname,
                             Name = name,
@@ -45,28 +62,38 @@ namespace _08_HW_GubinVS_2._0
                             Salary = salary,
                             QuantityProjects = progects,
                             WorkerId = Guid.NewGuid()
-                
-                        });
+                        }
+                );
           
             }
             else
             {
-                Console.WriteLine("Такого департаента не существует, сначала необходимо добавить департамент");
-            }
-
-        }
-
-        public void AddDepartament(string depname, DateTime date)
-        {
-            this.Departaments.Add(
-                new Departament()
+                Random ran = new Random();
+                this.Departaments.Add(
+                    new Departament()
                     {
                         DepartamentName = depname,
-                        Date = date
-                    }
-                );
-            
+                        Date = new DateTime (ran.Next(2000,2020), ran.Next(1,12), ran.Next(28))
+                    });
+                this.AddWorker(depname, surname, name, age, salary, progects);
+            }
         }
+
+        ///// <summary>
+        ///// Метод добавления департамента
+        ///// </summary>
+        ///// <param name="depname">Наименование департамента</param>
+        ///// <param name="date">Дата</param>
+        //public void AddDepartament(string depname, DateTime date)
+        //{
+        //    this.Departaments.Add(
+        //        new Departament()
+        //            {
+        //                DepartamentName = depname,
+        //                Date = date
+        //            }
+        //        );  
+        //}
 
         /// <summary>
         /// Метод печати в консоль данных о компании
@@ -76,13 +103,13 @@ namespace _08_HW_GubinVS_2._0
             int count = this.Workers.Count;
             for (int i = 0; i < count; i++)
             {
-                Console.Write($"{i+1, 5} |");
+                Console.Write($"{this.Workers[i].Number, 5} |");
                 Console.Write($"{this.Workers[i].SurName,15} |");
                 Console.Write($"{this.Workers[i].Name,15} |");
                 Console.Write($"{this.Workers[i].Age,15} |");
                 Console.Write($"{this.Workers[i].DepartamentName,15} |");
-                Console.Write($"{this.Workers[i].Age,15} |");
-                Console.Write($"{this.Workers[i].Age,15} |");
+                Console.Write($"{this.Departaments[ChekDepIndex(this.Workers[i].DepartamentName)].Date.ToString("d"),15} |"); // дата создания, проверка на соответствие
+                Console.Write($"{ChekQuentityWorker(this.Workers[i].DepartamentName),15} |");  // Кол-во сотрудников в департаменте
                 Console.Write($"{this.Workers[i].Salary, 15} |");
                 Console.Write($"{this.Workers[i].QuantityProjects, 15} |");
                 Console.Write($"{this.Workers[i].WorkerId, 40} |");
@@ -100,12 +127,74 @@ namespace _08_HW_GubinVS_2._0
             return this.Departaments.Exists(x => x.DepartamentName.Contains(depname));
         }
 
+        /// <summary>
+        /// Метод возвращает индекс первого вхождения искомого департамента
+        /// </summary>
+        /// <param name="depname">Наименование департамена у которого определяется индекс</param>
+        /// <returns></returns>
+        public int ChekDepIndex(string depname)
+        {
+            int count = this.Departaments.Count;
+            for (int i = 0; i < count; i++)
+            {
+                if (this.Departaments[i].DepartamentName == depname)return i;
+            }
+            return -1;
+        }
 
-        //public int ChekDepNameIndex(string depname)
-        //{ 
+        /// <summary>
+        /// Метод перебирает колекцию сотрудников и пересчитывает количество сотрудников в принимаемом департаменте
+        /// возвращает кол-во сотрудников в департаменте
+        /// </summary>
+        /// <param name="depname"></param>
+        /// <returns></returns>
+        public int ChekQuentityWorker(string depname)
+        {
+            int index = 0;
+            int count = this.Workers.Count;
+            for (int i = 0; i < count; i++)
+            {
+                if (this.Workers[i].DepartamentName == depname) index++;
+            }
+            return index;
+        }
+
+        /// <summary>
+        /// Метод сортировки сотрудников по возрасту в рамках одного департамента
+        /// </summary>
+        public void SortAgeWorker()
+        {
+
+            this.Workers.Sort(new SortAge());
             
-        
+        }
+
+
+
+        //public List<Worker> Sort()
+        //{
+        //   var sort = this.Workers.OrderBy(x => x.Age).ThenBy(y => y.QuantityProjects) as List<Worker>;
+        //    return sort;
         //}
+
+        //public void PrintAfteSorting(List<Worker> workers)
+        //{
+        //    foreach (var item in workers)
+        //    {
+        //        Console.Write($"{item.Number,5} |");
+        //        Console.Write($"{item.SurName,15} |");
+        //        Console.Write($"{item.Name,15} |");
+        //        Console.Write($"{item.Age,15} |");
+        //        Console.Write($"{item.DepartamentName,15} |");
+        //        Console.Write($"{this.Departaments[ChekDepIndex(item.DepartamentName)].Date.ToString("d"),15} |"); // дата создания, проверка на соответствие
+        //        Console.Write($"{ChekQuentityWorker(item.DepartamentName),15} |");
+        //        Console.Write($"{item.Salary,15} |");
+        //        Console.Write($"{item.QuantityProjects,15} |");
+        //        Console.Write($"{item.WorkerId,40} |");
+        //        Console.WriteLine();
+        //    }
+        //}
+
 
     }
 }
