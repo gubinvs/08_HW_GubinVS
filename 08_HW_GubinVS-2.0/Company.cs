@@ -126,16 +126,78 @@ namespace _08_HW_GubinVS_2._0
         ///// </summary>
         ///// <param name="depname">Наименование департамента</param>
         ///// <param name="date">Дата</param>
-        //public void AddDepartament(string depname, DateTime date)
-        //{
-        //    this.Departaments.Add(
-        //        new Departament()
-        //            {
-        //                DepartamentName = depname,
-        //                Date = date
-        //            }
-        //        );  
-        //}
+        public void AddDepartament(string depname, DateTime date)
+        {
+            this.Departaments.Add(
+                new Departament()
+                    {
+                        DepartamentName = depname,
+                        Date = date
+                    }
+                );
+        }
+
+        ///// <summary>
+        ///// Метод редактирования данных департамента
+        ///// </summary>
+        ///// <param name="depname">Наименование департамента</param>
+        ///// <param name="date">Дата</param>
+        public void EditDepartament(Departament dep)
+        {
+            int count = this.Departaments.Count;
+            for (int i = 0; i < count; i++)
+            {
+                if (this.Departaments[i].DepartamentName == dep.DepartamentName)
+                {
+                    this.Departaments[i].DepartamentName = dep.NewDepartamentName;
+                    this.Departaments[i].Date = dep.Date;
+                }
+            }
+            int countw = this.Workers.Count;
+            for (int i = 0; i < countw; i++)
+            {
+                if (this.Workers[i].DepartamentName == dep.DepartamentName)
+                {
+                    this.Workers[i].DepartamentName = dep.NewDepartamentName;
+                }
+            }
+
+        }
+
+
+        /// <summary>
+        /// Редактирование данных сотрудника выбранного по номеру в списке
+        /// </summary>
+        /// <param name="worker"></param>
+        public void EditWorker(Worker worker)
+        {
+            int count = this.Workers.Count;
+            for (int i = 0; i < count; i++)
+            {
+                if (this.Workers[i].Number == worker.Number)
+                {
+                    this.Workers[i].SurName = worker.SurName;
+                    this.Workers[i].Name = worker.Name;
+                    this.Workers[i].Age = worker.Age;
+                    this.Workers[i].Salary = worker.Salary;
+                    this.Workers[i].QuantityProjects = worker.QuantityProjects;
+                    this.Workers[i].DepartamentName = worker.DepartamentName;
+                }
+            }
+            int count2 = this.Departaments.Count;
+            for (int i = 0; i < count2; i++)
+            {
+                if (this.Departaments[i].DepartamentName == worker.DepartamentName)
+                {
+                    break;
+                }
+                else
+                {
+                    AddDepartament(worker.DepartamentName, new DateTime(2021,02,02));
+                }
+            }
+
+        }
 
         /// <summary>
         /// Метод печати в консоль данных о компании

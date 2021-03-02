@@ -14,6 +14,10 @@ namespace _08_HW_GubinVS_2._0
         /// </summary>
         public string DepartamentName { get; set; }
 
+        /// <summary>
+        ///  Новое наименование департамента
+        /// </summary>
+        public string NewDepartamentName { get; set; }
 
         /// <summary>
         /// Дата создания департамента
@@ -29,8 +33,8 @@ namespace _08_HW_GubinVS_2._0
 
         public Departament() 
         { 
-        }
 
+        }
 
     }
 }

@@ -121,11 +121,11 @@ namespace _08_HW_GubinVS_2._0
             //            break;
             //        case 3:
             //            Console.WriteLine("Режим удаления данных");
-                        Delete(AddPath());
+            //           Delete(AddPath());
             //            break;
             //        case 4:
             //            Console.WriteLine("Режим редактирования данных");
-            //            Edit();
+                        Edit();
             //            break;
             //        case 5:
             //            Console.WriteLine("Режим сортировки данных");
@@ -220,11 +220,11 @@ namespace _08_HW_GubinVS_2._0
             {
                 case 1:
                     // Удаление департамента
-                    DeleteDep(path, "Развития");
+                    DeleteDep(path, AddConsoleDep());
                     break;
                 case 2:
                     // Удаление сотрудника по фамилии
-                    DeleteSurname(path, "Петрова");
+                    DeleteSurname(path, AddConsoleSurName());
                     break;
 
                 default:
@@ -240,62 +240,82 @@ namespace _08_HW_GubinVS_2._0
         {
             Console.WriteLine(
                 "Необходимо выбрать данные для редактирования:\n" +
-                "1. Редактировать дату создания департамента \n" +
-                "2. Редактировать наименование департамента \n" +
-                "3. Редактировать фамилию сотрудника\n" +
-                "4. Редактировать имя сотрудника\n" +
-                "5. Редактировать возраст сотрудника\n" +
-                "6. Редактировать размер оплаты труда сотрудника\n" +
-                "7. Редактировать количество проектов у сотрудника\n"
+                "1. Редактировать данные департамента \n" +
+                "2. Редактировать данные сотрудника \n" 
                 );
             switch (Convert.ToInt32(Console.ReadLine()))
             {
                 case 1:
-                    Console.WriteLine("Режим редактирования даты сотрудника:\nВведите ID сотрудника:");
-                    Console.ReadLine();
-                    Console.WriteLine("Введите новую дату в формате: гггг,мм,дд");
-                    Console.ReadLine();
+                        Console.WriteLine("Режим редактирования данных департамента:");
+                        Company com = DeserializeXML(AddPath());
+                        com.PrintCompany();
+                        com.EditDepartament( ConsoleNewDep());
+                        com.PrintCompany();
+                        SerializeXML(AddPath(), com);
                     break;
                 case 2:
-                    Console.WriteLine("Режим редактирования названия департамента:\nВведите ID сотрудника:");
-                    Console.ReadLine();
-                    Console.WriteLine("Введите новое название департамента");
-                    Console.ReadLine();
+                    Console.WriteLine("Режим редактирования данных сотрудника:");
+                    Company newcom = DeserializeXML(AddPath());
+                    newcom.PrintCompany();
+                    newcom.EditWorker(ConsoleAddWorker());
+                    newcom.PrintCompany();
+                    //SerializeXML(AddPath(), newcom);
+                    
                     break;
-                case 3:
-                    Console.WriteLine("Режим редактирования фамилии сотрудника:\nВведите ID сотрудника:");
-                    Console.ReadLine();
-                    Console.WriteLine("Введите новую фамилию сотрудника");
-                    Console.ReadLine();
-                    break;
-                case 4:
-                    Console.WriteLine("Режим редактирования имени сотрудника:\nВведите ID сотрудника:");
-                    Console.ReadLine();
-                    Console.WriteLine("Введите новое имя сотрудника");
-                    Console.ReadLine();
-                    break;
-                case 5:
-                    Console.WriteLine("Режим редактирования возраста сотрудника:\nВведите ID сотрудника:");
-                    Console.ReadLine();
-                    Console.WriteLine("Введите новый возраст сотрудника");
-                    Console.ReadLine();
-                    break;
-                case 6:
-                    Console.WriteLine("Режим редактирования размера оплаты труда сотрудника:\nВведите ID сотрудника:");
-                    Console.ReadLine();
-                    Console.WriteLine("Введите новый размер оплаты труда сотрудника");
-                    Console.ReadLine();
-                    break;
-                case 7:
-                    Console.WriteLine("Режим редактирования количества проектов сотрудника:\nВведите ID сотрудника:");
-                    Console.ReadLine();
-                    Console.WriteLine("Введите новое количество проектов сотрудника");
-                    Console.ReadLine();
-                    break;
+                
                 default:
                     Console.WriteLine("Команда не распознана!");
                     break;
             }
+        }
+
+        /// <summary>
+        /// Метод заполняет с консоли и возвращает заполненную структуру департамента,
+        /// метод применяется для сбора информации о корректируемом департаменте
+        /// </summary>
+        private static Departament ConsoleNewDep()
+        {
+            Departament dep = new Departament();
+            dep.DepartamentName = AddConsoleDep();
+
+  
+            Console.WriteLine("Новое наименование департамента:");
+            dep.NewDepartamentName = AddConsoleDep();
+
+            Console.WriteLine("Год в формате гггг");
+            int eyar = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Месяц в формате мм");
+            int month = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("День в формате дд");
+            int day = Convert.ToInt32(Console.ReadLine());
+            dep.Date = new DateTime(eyar,month,day);
+
+            return dep;
+
+        }
+
+        /// <summary>
+        /// Метод принимет с консоли данные структуры и возвращает заполненныю
+        /// </summary>
+        private static Worker ConsoleAddWorker()
+        {
+            Worker w = new Worker();
+            Console.WriteLine("Введите № редактируемого сотрудника");
+            w.Number = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Фамилия сотрудника");
+            w.SurName = Console.ReadLine();
+            Console.WriteLine("Имя сотрудника");
+            w.Name = Console.ReadLine();
+            Console.WriteLine("Возраст сотрудника");
+            w.Age = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Департамент сотрудника");
+            w.DepartamentName = Console.ReadLine();
+            Console.WriteLine("Зарплата сотрудника");
+            w.Salary = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Проектов у сотрудника");
+            w.QuantityProjects = Convert.ToInt32(Console.ReadLine());
+
+            return w;
         }
 
         /// <summary>
@@ -313,10 +333,9 @@ namespace _08_HW_GubinVS_2._0
             Company newcom = DeserializeXML(path);
             // Печать данных сериализации в консоль
             newcom.PrintCompany();
-            // Удаление сотрудника данными введенными с консоли
+            // Удаление департамента наименование которого введенно с консоли
             //newcom.DeleteDep(depname);
-            // Перерасчет поля QuentityWorker и заполнение данных полей новыми данными
-            //newcom.EditQuentityWorker();
+ 
             Console.WriteLine();
             // Печать обновленных данных в консоль
             newcom.PrintCompany();
@@ -341,8 +360,7 @@ namespace _08_HW_GubinVS_2._0
             newcom.PrintCompany();
             // Удаление сотрудника данными введенными с консоли
             //newcom.DeleteSurname(surname);
-            // Перерасчет поля QuentityWorker и заполнение данных полей новыми данными
-            //newcom.EditQuentityWorker();
+            Console.WriteLine();
             // Печать обновленных данных в консоль
             newcom.PrintCompany();
             // Сериализация новых данных в файлы xml и jason
@@ -455,6 +473,29 @@ namespace _08_HW_GubinVS_2._0
             w.QuantityProjects = Convert.ToInt32(Console.ReadLine());
 
             return w;
+        }
+
+        /// <summary>
+        /// Метод возвращает наиметование департаментасчитанное с консоли
+        /// </summary>
+        /// <returns></returns>
+        private static string AddConsoleDep()
+        {
+            Console.WriteLine("Введите наименование департамента");
+           string depname = Console.ReadLine();
+            return depname;
+        }
+
+        /// <summary>
+        /// Метод возвращает считанную с консоли фамилию сотрудника
+        /// </summary>
+        /// <returns></returns>
+        private static string AddConsoleSurName()
+        {
+            Console.WriteLine("Введите фамилию сотрудника");
+            string surname = Console.ReadLine();
+            return surname;
+
         }
     }
 }
