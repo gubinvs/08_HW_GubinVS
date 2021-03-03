@@ -121,11 +121,11 @@ namespace _08_HW_GubinVS_2._0
             }
         }
 
-        ///// <summary>
-        ///// Метод добавления департамента
-        ///// </summary>
-        ///// <param name="depname">Наименование департамента</param>
-        ///// <param name="date">Дата</param>
+        /// <summary>
+        /// Метод добавления департамента
+        /// </summary>
+        /// <param name="depname">Наименование департамента</param>
+        /// <param name="date">Дата</param>
         public void AddDepartament(string depname, DateTime date)
         {
             this.Departaments.Add(
@@ -137,11 +137,11 @@ namespace _08_HW_GubinVS_2._0
                 );
         }
 
-        ///// <summary>
-        ///// Метод редактирования данных департамента
-        ///// </summary>
-        ///// <param name="depname">Наименование департамента</param>
-        ///// <param name="date">Дата</param>
+        /// <summary>
+        /// Метод редактирования данных департамента
+        /// </summary>
+        /// <param name="depname">Наименование департамента</param>
+        /// <param name="date">Дата</param>
         public void EditDepartament(Departament dep)
         {
             int count = this.Departaments.Count;
@@ -163,7 +163,6 @@ namespace _08_HW_GubinVS_2._0
             }
 
         }
-
 
         /// <summary>
         /// Редактирование данных сотрудника выбранного по номеру в списке
@@ -264,41 +263,33 @@ namespace _08_HW_GubinVS_2._0
         }
 
         /// <summary>
-        /// Метод сортировки сотрудников по возрасту в рамках одного департамента
+        /// Метод выбора праметров сотрировки
         /// </summary>
         public void SortAgeWorker()
         {
-
-            this.Workers.Sort(new SortAge());
-            
+          this.Workers.Sort(new SortAge());  
         }
 
+        /// <summary>
+        /// Удаление департамента и всех сотрудников которые были приписаны к нему
+        /// </summary>
+        /// <param name="depname"></param>
+        public void DeleteDep(string depname)
+        {
+            this.Departaments.RemoveAll(x => x.DepartamentName == depname);
+            this.Workers.RemoveAll(x => x.DepartamentName == depname);
 
+        }
 
-        //public List<Worker> Sort()
-        //{
-        //   var sort = this.Workers.OrderBy(x => x.Age).ThenBy(y => y.QuantityProjects) as List<Worker>;
-        //    return sort;
-        //}
+        /// <summary>
+        /// Метод удаляет сотрудников с указанной фамилией
+        /// </summary>
+        /// <param name="surname"></param>
+        public void DeleteSurname(string surname)
+        {
+            this.Workers.RemoveAll(x => x.SurName == surname);
 
-        //public void PrintAfteSorting(List<Worker> workers)
-        //{
-        //    foreach (var item in workers)
-        //    {
-        //        Console.Write($"{item.Number,5} |");
-        //        Console.Write($"{item.SurName,15} |");
-        //        Console.Write($"{item.Name,15} |");
-        //        Console.Write($"{item.Age,15} |");
-        //        Console.Write($"{item.DepartamentName,15} |");
-        //        Console.Write($"{this.Departaments[ChekDepIndex(item.DepartamentName)].Date.ToString("d"),15} |"); // дата создания, проверка на соответствие
-        //        Console.Write($"{ChekQuentityWorker(item.DepartamentName),15} |");
-        //        Console.Write($"{item.Salary,15} |");
-        //        Console.Write($"{item.QuantityProjects,15} |");
-        //        Console.Write($"{item.WorkerId,40} |");
-        //        Console.WriteLine();
-        //    }
-        //}
-
+        }
 
     }
 }

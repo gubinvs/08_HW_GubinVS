@@ -99,52 +99,49 @@ namespace _08_HW_GubinVS_2._0
         {
             #region Режим работы программы
 
-            //do
-            //{
-            //    Console.WriteLine(
-            //        "Необходимо выбрать режим работы:\n" +
-            //        "1. Создать сотрудников рандомным способом\n" +
-            //        "2. Режим добавления данных из консоли\n" +
-            //        "3. Режим удаления данных\n" +
-            //        "4. Режим редактирования данных\n" +
-            //        "5. Режим сортировки данных\n"
-            //        );
-            //    switch (Convert.ToInt32(Console.ReadLine()))
-            //    {
-            //        case 1:
-            //          Console.WriteLine("Режим формирования данных рандомным способом");
-            //         RandomCreate(AddPath(), AddIntWorker());
-            //            break;
-            //        case 2:
-            //            Console.WriteLine("Режим добавления данных из консоли");
-            //          Create(AddPath());
-            //            break;
-            //        case 3:
-            //            Console.WriteLine("Режим удаления данных");
-            //           Delete(AddPath());
-            //            break;
-            //        case 4:
-            //            Console.WriteLine("Режим редактирования данных");
+            do
+            {
+                Console.WriteLine(
+                    "Необходимо выбрать режим работы:\n" +
+                    "1. Создать сотрудников рандомным способом\n" +
+                    "2. Режим добавления данных из консоли\n" +
+                    "3. Режим удаления данных\n" +
+                    "4. Режим редактирования данных\n" +
+                    "5. Режим сортировки данных\n"
+                    );
+                switch (Convert.ToInt32(Console.ReadLine()))
+                {
+                    case 1:
+                        Console.WriteLine("Режим формирования данных рандомным способом");
+                        RandomCreate(AddPath(), AddIntWorker());
+                        break;
+                    case 2:
+                        Console.WriteLine("Режим добавления данных из консоли");
+                        Create(AddPath());
+                        break;
+                    case 3:
+                        Console.WriteLine("Режим удаления данных");
+                        Delete(AddPath());
+                        break;
+                    case 4:
+                        Console.WriteLine("Режим редактирования данных");
                         Edit();
-            //            break;
-            //        case 5:
-            //            Console.WriteLine("Режим сортировки данных");
-            //            string path = @"C:\08_HW_GubinVS\company.xml";
-            //            SortAge(path);
-            //            break;
+                        break;
+                    case 5:
+                        Console.WriteLine("Режим сортировки данных");
 
-            //        default:
-            //            Console.WriteLine("Команда не распознана!");
-            //            break;
-            //    }
+                        SortWorker(AddPath());
+                        break;
 
-            //} while (true);
+                    default:
+                        Console.WriteLine("Команда не распознана!");
+                        break;
+                }
+
+            } while (true);
             #endregion Режим работы программы
 
         }
-
-
-
 
 
         /// <summary>
@@ -160,16 +157,37 @@ namespace _08_HW_GubinVS_2._0
         /// <summary>
         /// Сортировка сотрудников по возрасту в рамках одного департамента
         /// </summary>
-        private static void SortAge(string path)
+        private static void SortWorker(string path)
         {
             // Инициализация класса заголовок таблицы и печать заголовка в консоли
             Heading head = new Heading();
             head.PrintHeading();
-            Company newcom = DeserializeXML(path);
-            // Сортировка сотрудников по возрасту в рамках одного департамента
-            newcom.SortAgeWorker();
-            // Вывод в консоль результата сортировки
-            newcom.PrintCompany();
+            Company com = DeserializeXML(path);
+            com.PrintCompany();
+            // Выбор режима сортировки
+            Console.WriteLine("Необходимо выбрать режим работы:");
+            Console.WriteLine("" +
+                "1. Сортировка сотрудников по возрасту\n" +
+                "2. Сортировка по возрасту и оплате труда в рамках одного департаменты\n"
+                );
+            switch (Convert.ToInt32(Console.ReadLine()))
+            {
+                case 1:
+                    com.SortAgeWorker();
+                    com.PrintCompany();
+                    break;
+                case 2:
+                    
+                    SortAgeEndSalary(com);
+          
+
+                    break;
+
+                default:
+                    break;
+            }
+
+            
         }
 
         /// <summary>
@@ -188,7 +206,7 @@ namespace _08_HW_GubinVS_2._0
         /// <returns></returns>
         private static string AddPath()
         {
-            Console.WriteLine("Введите полный путь к файлу для сериализации данных");
+            //Console.WriteLine("Введите полный путь к файлу для сериализации данных");
             string path = @"C:\08_HW_GubinVS_2.0\company.xml";//Console.ReadLine();
             return path;
         }
@@ -200,7 +218,7 @@ namespace _08_HW_GubinVS_2._0
         private static int AddIntWorker()
         {
             Console.WriteLine("Введите необходимое количество сотрудников:");
-            int worker = 10; //Convert.ToInt32(Console.ReadLine());
+            int worker = Convert.ToInt32(Console.ReadLine());
             return worker;
         }
 
@@ -259,7 +277,7 @@ namespace _08_HW_GubinVS_2._0
                     newcom.PrintCompany();
                     newcom.EditWorker(ConsoleAddWorker());
                     newcom.PrintCompany();
-                    //SerializeXML(AddPath(), newcom);
+                    SerializeXML(AddPath(), newcom);
                     
                     break;
                 
@@ -330,18 +348,18 @@ namespace _08_HW_GubinVS_2._0
             Heading head = new Heading();
             head.PrintHeading();
 
-            Company newcom = DeserializeXML(path);
+            Company com = DeserializeXML(path);
             // Печать данных сериализации в консоль
-            newcom.PrintCompany();
+            com.PrintCompany();
             // Удаление департамента наименование которого введенно с консоли
-            //newcom.DeleteDep(depname);
+            com.DeleteDep(depname);
  
             Console.WriteLine();
             // Печать обновленных данных в консоль
-            newcom.PrintCompany();
+            com.PrintCompany();
             // Сериализация новых данных в файлы xml и jason
-            SerializeXML(path, newcom);
-            JsonSerialize(newcom);
+            SerializeXML(path, com);
+            JsonSerialize(com);
         }
 
         /// <summary>
@@ -355,16 +373,16 @@ namespace _08_HW_GubinVS_2._0
             Heading head = new Heading();
             head.PrintHeading();
 
-            Company newcom = DeserializeXML(path);
+            Company com = DeserializeXML(path);
             // Печать данных сериализации в консоль
-            newcom.PrintCompany();
+            com.PrintCompany();
             // Удаление сотрудника данными введенными с консоли
-            //newcom.DeleteSurname(surname);
+            com.DeleteSurname(surname);
             Console.WriteLine();
             // Печать обновленных данных в консоль
-            newcom.PrintCompany();
+            com.PrintCompany();
             // Сериализация новых данных в файлы xml и jason
-            SerializeXML(path, newcom);
+            SerializeXML(path, com);
         }
 
         /// <summary>
@@ -497,5 +515,31 @@ namespace _08_HW_GubinVS_2._0
             return surname;
 
         }
+
+        /// <summary>
+        /// Метод метод сортировки по возрасту и оплате труда в рамках одного департамента
+        /// </summary>
+        /// <returns></returns>
+        private static void SortAgeEndSalary(Company company)
+        {
+            var sort = company.Workers.OrderBy(x => x.Age).ThenBy(y => y.Salary);
+           
+                foreach (var item in sort)
+                {
+                    Console.Write($"{item.Number,5} |");
+                    Console.Write($"{item.SurName,15} |");
+                    Console.Write($"{item.Name,15} |");
+                    Console.Write($"{item.Age,15} |");
+                    Console.Write($"{item.DepartamentName,15} |");
+                    Console.Write($"{company.Departaments[company.ChekDepIndex(item.DepartamentName)].Date.ToString("d"),15} |"); // дата создания, проверка на соответствие
+                    Console.Write($"{company.ChekQuentityWorker(item.DepartamentName),15} |");
+                    Console.Write($"{item.Salary,15} |");
+                    Console.Write($"{item.QuantityProjects,15} |");
+                    Console.Write($"{item.WorkerId,40} |");
+                    Console.WriteLine();
+                }
+            
+        }
+
     }
 }
