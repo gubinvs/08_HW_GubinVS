@@ -31,10 +31,5 @@ namespace _08_HW_GubinVS_2._0
         public int QuentityWorker { get; set; }
 
 
-        public Departament() 
-        { 
-
-        }
-
     }
 }
