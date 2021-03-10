@@ -11,14 +11,65 @@ namespace _08_HW_GubinVS_2._0
     {
 
         /// <summary>
-        /// Метод десиарилазации данных о компании json из файла
+        /// Метод принимает значение int (количество сотрудников), заполняет данные о сотрудниках
+        /// сгенерировав случайным образом их данные, выводит результат в консоль и сириализует данные в XML файл
         /// </summary>
-        public static Company JsonDeserializer(string fileJson)
+        public static void RandomCreate(string path, uint number)
         {
-            string json = File.ReadAllText(fileJson);
-            Company com = JsonConvert.DeserializeObject<Company>(json);
-            return com;
+            // Инициализация класса заголовок таблицы и печать заголовка в консоли
+            Heading head = new Heading();
+            head.PrintHeading();
+
+            // Заполнение данных о сотрудниках
+            Company com = new Company();
+            for (uint i = 0; i < number; i++)
+            {
+                com.AddRandomWorker(new Filling().StringWorker(), new Filling().IntWorker());
+            }
+            //Печать данных в консоль
+            com.PrintCompany();
+            // Сериализация данных в файл XML
+            MySerialization.SerializeXML(path, com);
+          
         }
+
+        /// <summary>
+        /// Метод возвращает введенное с консоли значение - полный путь к файлу xml
+        /// </summary>
+        public static string AddPath()
+        {
+            Console.WriteLine("Введите полный путь к xml файлу:");
+            string path = Console.ReadLine();
+            while (ChekInputParameters.FileExists(path))
+            {
+                string p = $@"{path}";
+                return p;
+            }
+            Console.WriteLine("По указанному пути файла не обнаружено!");
+            AddPath();
+            return null;
+            
+        }
+
+        /// <summary>
+        /// Метод запрашивает количество создаваемых сотрудников и возвращает введенное из консоли число
+        /// </summary>
+        /// <returns></returns>
+        public static uint AddIntWorker()
+        {
+            Console.WriteLine("Введите необходимое количество сотрудников:");
+            string str = Console.ReadLine();
+            if (ChekInputParameters.ChekUInt(str))
+            {
+                uint worker = Convert.ToUInt32(str);
+                return worker;
+            }
+            Console.WriteLine("Это не число!"); // Можно написать, что типо меньше 0 или слишком большое
+            AddIntWorker();
+            return 0;
+
+        }
+
 
         /// <summary>
         /// Сортировка сотрудников по возрасту в рамках одного департамента
@@ -28,8 +79,8 @@ namespace _08_HW_GubinVS_2._0
             // Инициализация класса заголовок таблицы и печать заголовка в консоли
             Heading head = new Heading();
             head.PrintHeading();
-            Company com = DeserializeXML(path);
-            com.PrintCompany();
+            Company company = MySerialization.DeserializeXML(path);
+            company.PrintCompany();
             // Выбор режима сортировки
             Console.WriteLine("Необходимо выбрать режим работы:");
             Console.WriteLine("" +
@@ -39,11 +90,11 @@ namespace _08_HW_GubinVS_2._0
             switch (ChekInputParameters.MenuNumber(Console.ReadLine()))
             {
                 case 1:
-                    com.SortAgeWorker();
-                    com.PrintCompany();
+                    company.SortAgeWorker();
+                    company.PrintCompany();
                     break;
                 case 2:
-                    SortAgeEndSalary(com);
+                    SortAgeEndSalary(company);
                     break;
 
                 default:
@@ -53,37 +104,29 @@ namespace _08_HW_GubinVS_2._0
 
         }
 
-        /// <summary>
-        /// Json сериализация
-        /// </summary>
-        /// <param name="newcom"></param>
-        public static void JsonSerialize(Company newcom)
-        {
-            string json = JsonConvert.SerializeObject(newcom);
-            File.WriteAllText(@"C:\08_HW_GubinVS_2.0\company.json", json);
-        }
 
-        /// <summary>
-        /// Метод возвращает введенное с консоли значение - полный путь к файлу xml
-        /// </summary>
-        /// <returns></returns>
-        public static string AddPath()
-        {
-            //Console.WriteLine("Введите полный путь к xml файлу для сериализации данных");
-            string path = @"C:\08_HW_GubinVS_2.0\company.xml";//Console.ReadLine();
-            return path;
-        }
 
-        /// <summary>
-        /// Метод запрашивает количество создаваемых сотрудников и возвращает введенное из консоли число
-        /// </summary>
-        /// <returns></returns>
-        public static int AddIntWorker()
-        {
-            Console.WriteLine("Введите необходимое количество сотрудников:");
-            int worker = ChekInputParameters.MenuNumber(Console.ReadLine());
-            return worker;
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         /// <summary>
         /// Метод удаления данных
@@ -127,20 +170,20 @@ namespace _08_HW_GubinVS_2._0
             switch (ChekInputParameters.MenuNumber(Console.ReadLine()))
             {
                 case 1:
-                    Console.WriteLine("Режим редактирования данных департамента:");
-                    Company com = DeserializeXML(AddPath());
-                    com.PrintCompany();
-                    com.EditDepartament(ConsoleNewDep());
-                    com.PrintCompany();
-                    SerializeXML(AddPath(), com);
+                    //Console.WriteLine("Режим редактирования данных департамента:");
+                    //Company com =// DeserializeXML(AddPath());
+                    //com.PrintCompany();
+                    //com.EditDepartament(ConsoleNewDep());
+                    //com.PrintCompany();
+                    //SerializeXML(AddPath(), com);
                     break;
                 case 2:
-                    Console.WriteLine("Режим редактирования данных сотрудника:");
-                    Company newcom = DeserializeXML(AddPath());
-                    newcom.PrintCompany();
-                    newcom.EditWorker(ConsoleAddWorker());
-                    newcom.PrintCompany();
-                    SerializeXML(AddPath(), newcom);
+                    //Console.WriteLine("Режим редактирования данных сотрудника:");
+                    //Company newcom = //DeserializeXML(AddPath());
+                    //newcom.PrintCompany();
+                    //newcom.EditWorker(ConsoleAddWorker());
+                    //newcom.PrintCompany();
+                    //SerializeXML(AddPath(), newcom);
 
                     break;
 
@@ -211,18 +254,18 @@ namespace _08_HW_GubinVS_2._0
             Heading head = new Heading();
             head.PrintHeading();
 
-            Company com = DeserializeXML(path);
+            //Company com = DeserializeXML(path);
             // Печать данных сериализации в консоль
-            com.PrintCompany();
+            //com.PrintCompany();
             // Удаление департамента наименование которого введенно с консоли
-            com.DeleteDep(depname);
+            //com.DeleteDep(depname);
 
-            Console.WriteLine();
+            //Console.WriteLine();
             // Печать обновленных данных в консоль
-            com.PrintCompany();
+            //com.PrintCompany();
             // Сериализация новых данных в файлы xml и jason
-            SerializeXML(path, com);
-            JsonSerialize(com);
+            //SerializeXML(path, com);
+            //JsonSerialize(com);
         }
 
         /// <summary>
@@ -236,16 +279,16 @@ namespace _08_HW_GubinVS_2._0
             Heading head = new Heading();
             head.PrintHeading();
 
-            Company com = DeserializeXML(path);
-            // Печать данных сериализации в консоль
-            com.PrintCompany();
-            // Удаление сотрудника данными введенными с консоли
-            com.DeleteSurname(surname);
-            Console.WriteLine();
-            // Печать обновленных данных в консоль
-            com.PrintCompany();
-            // Сериализация новых данных в файлы xml и jason
-            SerializeXML(path, com);
+            //Company com = DeserializeXML(path);
+            //// Печать данных сериализации в консоль
+            //com.PrintCompany();
+            //// Удаление сотрудника данными введенными с консоли
+            //com.DeleteSurname(surname);
+            //Console.WriteLine();
+            //// Печать обновленных данных в консоль
+            //com.PrintCompany();
+            //// Сериализация новых данных в файлы xml и jason
+            ////SerializeXML(path, com);
         }
 
         /// <summary>
@@ -257,75 +300,22 @@ namespace _08_HW_GubinVS_2._0
         {
             Heading head = new Heading();
             head.PrintHeading();
-            Company newcom = DeserializeXML(path);
+            //Company newcom = DeserializeXML(path);
             // Печать данных сериализации в консоль
-            newcom.PrintCompany();
+            //newcom.PrintCompany();
             // Добавление нового сотрудника данными введенными с консоли
-            newcom.AddWorker(Worker());
+            //newcom.AddWorker(Worker());
             // Печать обновленных данных в консоль
-            newcom.PrintCompany();
+            //newcom.PrintCompany();
             // Сериализация новых данных в файлы xml и jason
-            SerializeXML(path, newcom);
+            //SerializeXML(path, newcom);
             //JsonSerialize(newcom);
         }
 
-        /// <summary>
-        /// Метод принимает значение int (количество сотрудников), заполняет данные о сотрудниках
-        /// сгенерировав случайным образом их данные, выводит результат в консоль и сириализует данные в XML файл
-        /// </summary>
-        /// <param name="number">Необходимое количество сотрудников</param>
-        /// <param name="path">Путь к файлу для сериализации</param>
-        public static void RandomCreate(string path, int number)
-        {
-            // Инициализация класса заголовок таблицы и печать заголовка в консоли
-            Heading head = new Heading();
-            head.PrintHeading();
 
-            // Заполнение данных о сотрудниках
-            Company com = new Company();
-            for (int i = 0; i < number; i++)
-            {
-                com.AddRandomWorker(new Filling().StringWorker(), new Filling().IntWorker());
-            }
-            //Печать данных в консоль
-            com.PrintCompany();
-            // Сериализация данных в файл  XML
-            SerializeXML(path, com);
-            // Сериализация данных в файл  JSON
-            //JsonSerialize(com);
-        }
 
-        /// <summary>
-        /// Метод десериализации данных из файла XML
-        /// </summary>
-        /// <param name="path">Путь к файлу с данными для десиарелазиции</param>
-        /// <returns></returns>
-        public static Company DeserializeXML(string path)
-        {
-            Company newcom = new Company();
-            XmlSerializer newxml = new XmlSerializer(typeof(Company));
 
-            using (Stream newstr = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                newcom = (Company)newxml.Deserialize(newstr);
-            }
 
-            return newcom;
-        }
-
-        /// <summary>
-        /// Метод сериализации данных в XML файл
-        /// </summary>
-        /// <param name="path">Путь к файлу для сериалезации</param>
-        /// <param name="com">Сериализуемый класс</param>
-        public static void SerializeXML(string path, Company com)
-        {
-            XmlSerializer xml = new XmlSerializer(typeof(Company));
-            using (Stream str = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
-            {
-                xml.Serialize(str, com);
-            }
-        }
 
         /// <summary>
         /// Метод добавления сотрудника данными введенными с консоли
@@ -409,13 +399,15 @@ namespace _08_HW_GubinVS_2._0
         /// <param name="path"></param>
         public static void Read(string path)
         {
+            Console.WriteLine("\n\n");
             // Инициализация класса заголовок таблицы и печать заголовка в консоли
             Heading head = new Heading();
             head.PrintHeading();
 
-            Company com = DeserializeXML(path);
+            Company company = MySerialization.DeserializeXML(path);
             // Печать данных сериализации в консоль
-            com.PrintCompany();
+            company.PrintCompany();
+            Console.WriteLine("\n\n");
 
         }
 
