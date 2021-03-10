@@ -7,8 +7,8 @@
       <QuentityWorker>0</QuentityWorker>
     </Departament>
     <Departament>
-      <DepartamentName>Финансов</DepartamentName>
-      <Date>2009-02-10T00:00:00</Date>
+      <DepartamentName>угуг</DepartamentName>
+      <Date>2021-12-05T00:00:00</Date>
       <QuentityWorker>0</QuentityWorker>
     </Departament>
   </Departaments>
@@ -30,7 +30,7 @@
       <Age>26</Age>
       <Salary>105014</Salary>
       <QuantityProjects>8</QuantityProjects>
-      <DepartamentName>Финансов</DepartamentName>
+      <DepartamentName>угуг</DepartamentName>
       <WorkerId>b6dc20b7-7bc7-42d7-ba11-147ba78c02fa</WorkerId>
     </Worker>
     <Worker>
@@ -40,8 +40,9 @@
       <Age>30</Age>
       <Salary>37124</Salary>
       <QuantityProjects>5</QuantityProjects>
-      <DepartamentName>Финансов</DepartamentName>
+      <DepartamentName>угуг</DepartamentName>
       <WorkerId>5b23dd84-f6cc-4585-aece-957066b1bb46</WorkerId>
     </Worker>
   </Workers>
+</Company>  </Workers>
 </Company>

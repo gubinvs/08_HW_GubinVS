@@ -105,33 +105,10 @@ namespace _08_HW_GubinVS_2._0
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         /// <summary>
         /// Метод удаления данных
         /// </summary>
-        /// <param name="path"></param>
+        
         public static void Delete(string path)
         {
             // Режим удаления данных по выбранному параметру:
@@ -158,6 +135,164 @@ namespace _08_HW_GubinVS_2._0
         }
 
         /// <summary>
+        /// Метод принимает путь к файлу для сериализации и наименование департамента и удаляет все совпадения
+        /// </summary>
+ 
+        public static void DeleteDep(string path, string depname)
+        {
+
+            // Инициализация класса заголовок таблицы и печать заголовка в консоли
+            Heading head = new Heading();
+            head.PrintHeading();
+
+            Company company = MySerialization.DeserializeXML(path);
+            // Печать данных сериализации в консоль
+            company.PrintCompany();
+            // Удаление департамента наименование которого введенно с консоли
+            company.DeleteDep(depname);
+
+            Console.WriteLine();
+
+            // Печать обновленных данных в консоль
+            company.PrintCompany();
+
+            // Сериализация новых данных в файлы xml и jason
+            MySerialization.SerializeXML(path, company);
+            
+        }
+
+        /// <summary>
+        /// Метод возвращает наименование департаментасчитанное с консоли
+        /// </summary>
+        
+        public static string AddConsoleDep()
+        {
+            Console.WriteLine("Введите наименование департамента:");
+            string depname = Console.ReadLine();
+            return depname;
+        }
+
+        /// <summary>
+        /// Метод возвращает считанную с консоли фамилию сотрудника
+        /// </summary>
+        /// <returns></returns>
+        public static string AddConsoleSurName()
+        {
+            Console.WriteLine("Введите фамилию сотрудника");
+            string surname = Console.ReadLine();
+            return surname;
+
+        }
+
+
+        /// <summary>
+        /// Метод добавления сотрудника данными введенными с консоли.
+        /// Метод считывает данные из файла xml, заполняет данные о работнике введенные в консоль и сериализует данные в файл xml и jason
+        /// </summary>
+    
+        public static void Create(string path)
+        {
+            Heading head = new Heading();
+            head.PrintHeading();
+
+            Company company = MySerialization.DeserializeXML(path);
+            // Печать данных сериализации в консоль
+            company.PrintCompany();
+
+            // Добавление нового сотрудника данными введенными с консоли
+            company.AddWorker(Worker());
+            // Печать обновленных данных в консоль
+            company.PrintCompany();
+
+            // Сериализация новых данных в файлы xml и jason
+            MySerialization.SerializeXML(path, company);
+           
+        }
+
+        /// <summary>
+        /// Метод добавления сотрудника данными введенными с консоли
+        /// </summary>
+        public static Worker Worker()
+        {
+            Worker w = new Worker();
+            Console.WriteLine("Введите наименование департамента:");
+            w.DepartamentName = Console.ReadLine();
+
+            Console.WriteLine("Введите фамилию сотрудника:");
+            w.SurName = Console.ReadLine();
+
+            Console.WriteLine("Введите имя сотрудника:");
+            w.Name = Console.ReadLine();
+
+            w.Age = AddAgeConsole();
+
+            w.Salary = AddSalaryConsole();
+
+            w.QuantityProjects = AddProjectsConsole();
+
+            return w;
+        }
+
+        /// <summary>
+        /// Метод считывает значение возраст сотрудника из консоли и возвращает int
+        /// </summary>
+        /// <returns></returns>
+        private static int AddAgeConsole()
+        { 
+            Console.WriteLine("Введите возраст сотрудника:");
+            string str = Console.ReadLine();
+            if (ChekInputParameters.ChekInt(str))
+            {
+                int age = Convert.ToInt32(str);
+                return age;
+            }
+            Console.WriteLine("Некорректные данные!");
+            AddAgeConsole();
+            return -1;
+            
+        }
+
+
+        /// <summary>
+        /// Метод считывает значение равное размеру оплаты труда сотрудника из консоли и возвращает int
+        /// </summary>
+        /// <returns></returns>
+        private static int AddSalaryConsole()
+        {
+            Console.WriteLine("Введите размер оплаты труда сотрудника:");
+            string str = Console.ReadLine();
+            if (ChekInputParameters.ChekInt(str))
+            {
+                int salary = Convert.ToInt32(str);
+                return salary;
+            }
+            Console.WriteLine("Некорректные данные!");
+            AddAgeConsole();
+            return -1;
+
+        }
+
+        /// <summary>
+        /// Метод считывает значение равное размеру оплаты труда сотрудника из консоли и возвращает int
+        /// </summary>
+        /// <returns></returns>
+        private static int AddProjectsConsole()
+        {
+            Console.WriteLine("Введите количество проектов у сотрудника:");
+            string str = Console.ReadLine();
+            if (ChekInputParameters.ChekInt(str))
+            {
+                int projects = Convert.ToInt32(str);
+                return projects;
+            }
+            Console.WriteLine("Некорректные данные!");
+            AddAgeConsole();
+            return -1;
+
+        }
+
+
+        /// <summary>
         /// Метод редактирования данных
         /// </summary>
         public static void Edit()
@@ -170,21 +305,10 @@ namespace _08_HW_GubinVS_2._0
             switch (ChekInputParameters.MenuNumber(Console.ReadLine()))
             {
                 case 1:
-                    //Console.WriteLine("Режим редактирования данных департамента:");
-                    //Company com =// DeserializeXML(AddPath());
-                    //com.PrintCompany();
-                    //com.EditDepartament(ConsoleNewDep());
-                    //com.PrintCompany();
-                    //SerializeXML(AddPath(), com);
+                    EditDep();
                     break;
                 case 2:
-                    //Console.WriteLine("Режим редактирования данных сотрудника:");
-                    //Company newcom = //DeserializeXML(AddPath());
-                    //newcom.PrintCompany();
-                    //newcom.EditWorker(ConsoleAddWorker());
-                    //newcom.PrintCompany();
-                    //SerializeXML(AddPath(), newcom);
-
+                    EditWorker();
                     break;
 
                 default:
@@ -193,30 +317,128 @@ namespace _08_HW_GubinVS_2._0
             }
         }
 
+
+        /// <summary>
+        /// Метод редактирования данных о департаменте
+        /// </summary>
+        private static void EditDep()
+        {
+            Console.WriteLine("Режим редактирования данных департамента:");
+
+            // Считывание данных из файла
+            Company com = MySerialization.DeserializeXML(AddPath());
+
+            // Печать считанных данных в консоль
+            com.PrintCompany();
+
+            // Редактирование данных о департаменте полученных из консоли
+            com.EditDepartament(ConsoleNewDep());                               
+
+            // печать в консоль обновленных данных
+            com.PrintCompany();
+
+            // Сохранение обновленных данных в файл
+            MySerialization.SerializeXML(AddPath(), com);
+
+        }
+
+
         /// <summary>
         /// Метод заполняет с консоли и возвращает заполненную структуру департамента,
         /// метод применяется для сбора информации о корректируемом департаменте
         /// </summary>
-        public static Departament ConsoleNewDep()
+        private static Departament ConsoleNewDep()
         {
             Departament dep = new Departament();
             dep.DepartamentName = AddConsoleDep();
 
-
             Console.WriteLine("Новое наименование департамента:");
             dep.NewDepartamentName = AddConsoleDep();
 
-            Console.WriteLine("Год в формате гггг");
-            int eyar = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Месяц в формате мм");
-            int month = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("День в формате дд");
-            int day = Convert.ToInt32(Console.ReadLine());
-            dep.Date = new DateTime(eyar, month, day);
+            dep.Date = AddDataTimeConsole();
 
             return dep;
 
         }
+
+        /// <summary>
+        /// Метод принимает данные из консоли и возвращает дату
+        /// </summary>
+        /// <returns></returns>
+        private static DateTime AddDataTimeConsole()
+        {
+            Console.WriteLine("Введите дату в формате: ГГГГ,ММ,ДД");
+            string text = Console.ReadLine();
+            if (ChekInputParameters.ChekDataTime(text))
+            {
+                DateTime data = Convert.ToDateTime(text);
+                return data;
+            }
+            Console.WriteLine("Некорректные данные!");
+            AddDataTimeConsole();
+            return new DateTime();
+
+        }
+
+
+        /// <summary>
+        /// Метод редактирования данных сотрудника
+        /// </summary>
+        private static void EditWorker()
+        {
+            Console.WriteLine("Режим редактирования данных сотрудника:");
+            // Чтение данных из файла
+            Company company = MySerialization.DeserializeXML(AddPath());
+
+            // Печать данных из файла в консоль
+            company.PrintCompany();
+
+            // Редактирование данных сотрудника
+            //company.EditWorker(ConsoleAddWorker());
+
+            // Печать обновленных данных
+            company.PrintCompany();
+
+            // Запись обновленных данных в файл
+            MySerialization.SerializeXML(AddPath(), company);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         /// <summary>
         /// Метод принимет с консоли данные структуры и возвращает заполненныю
@@ -242,31 +464,7 @@ namespace _08_HW_GubinVS_2._0
             return w;
         }
 
-        /// <summary>
-        /// Метод принимает путь к файлу для сериализации и наименование департамента и удаляет все совпадения
-        /// </summary>
-        /// <param name="path">Путь к файлу для сериализации</param>
-        /// <param name="depname">Наименование департамента</param>
-        public static void DeleteDep(string path, string depname)
-        {
 
-            // Инициализация класса заголовок таблицы и печать заголовка в консоли
-            Heading head = new Heading();
-            head.PrintHeading();
-
-            //Company com = DeserializeXML(path);
-            // Печать данных сериализации в консоль
-            //com.PrintCompany();
-            // Удаление департамента наименование которого введенно с консоли
-            //com.DeleteDep(depname);
-
-            //Console.WriteLine();
-            // Печать обновленных данных в консоль
-            //com.PrintCompany();
-            // Сериализация новых данных в файлы xml и jason
-            //SerializeXML(path, com);
-            //JsonSerialize(com);
-        }
 
         /// <summary>
         /// Метод принимает данные о фамилии сотрудника и удаляет сотрудников с данной фамилией
@@ -291,81 +489,6 @@ namespace _08_HW_GubinVS_2._0
             ////SerializeXML(path, com);
         }
 
-        /// <summary>
-        /// Метод добавления сотрудника данными введенными с консоли.
-        /// Метод считывает данные из файла xml, заполняет данные о работнике введенные в консоль и сериализует данные в файл xml и jason
-        /// </summary>
-        /// <param name="path">Путь к файлу</param>
-        public static void Create(string path)
-        {
-            Heading head = new Heading();
-            head.PrintHeading();
-            //Company newcom = DeserializeXML(path);
-            // Печать данных сериализации в консоль
-            //newcom.PrintCompany();
-            // Добавление нового сотрудника данными введенными с консоли
-            //newcom.AddWorker(Worker());
-            // Печать обновленных данных в консоль
-            //newcom.PrintCompany();
-            // Сериализация новых данных в файлы xml и jason
-            //SerializeXML(path, newcom);
-            //JsonSerialize(newcom);
-        }
-
-
-
-
-
-
-        /// <summary>
-        /// Метод добавления сотрудника данными введенными с консоли
-        /// </summary>
-        public static Worker Worker()
-        {
-            Worker w = new Worker();
-            Console.WriteLine("Введите наименование департамента");
-            w.DepartamentName = Console.ReadLine();
-
-            Console.WriteLine("Введите фамилию сотрудника");
-            w.SurName = Console.ReadLine();
-
-            Console.WriteLine("Введите имя сотрудника");
-            w.Name = Console.ReadLine();
-
-            Console.WriteLine("Введите возраст сотрудника");
-            w.Age = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Введите размер оплаты труда сотрудника");
-            w.Salary = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Введите количество проектов у сотрудника");
-            w.QuantityProjects = Convert.ToInt32(Console.ReadLine());
-
-            return w;
-        }
-
-        /// <summary>
-        /// Метод возвращает наиметование департаментасчитанное с консоли
-        /// </summary>
-        /// <returns></returns>
-        public static string AddConsoleDep()
-        {
-            Console.WriteLine("Введите наименование департамента");
-            string depname = Console.ReadLine();
-            return depname;
-        }
-
-        /// <summary>
-        /// Метод возвращает считанную с консоли фамилию сотрудника
-        /// </summary>
-        /// <returns></returns>
-        public static string AddConsoleSurName()
-        {
-            Console.WriteLine("Введите фамилию сотрудника");
-            string surname = Console.ReadLine();
-            return surname;
-
-        }
 
         /// <summary>
         /// Метод метод сортировки по возрасту и оплате труда в рамках одного департамента

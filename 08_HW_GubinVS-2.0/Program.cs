@@ -119,20 +119,20 @@ namespace _08_HW_GubinVS_2._0
                         //Console.WriteLine("\n\n");
                         break;
                     case 2:
-                        Console.WriteLine("Режим добавления данных о сотруднике из консоли:");
-                        Repositiry.Create(Repositiry.AddPath());
+                        //Console.WriteLine("Режим добавления сотрудника из консоли:");
+                        //Repositiry.Create(Repositiry.AddPath());
                         break;
                     case 3:
-                        Console.WriteLine("Режим удаления данных сотрудника или департамента:");
-                        Repositiry.Delete(Repositiry.AddPath());
+                        //Console.WriteLine("Режим удаления данных сотрудника или департамента:");
+                        //Repositiry.Delete(Repositiry.AddPath());
                         break;
                     case 4:
                         Console.WriteLine("Режим редактирования данных сотрудника или департамента:");
                         Repositiry.Edit();
                         break;
                     case 5:
-                        Console.WriteLine("Режим сортировки данных:");
-                        Repositiry.SortWorker(Repositiry.AddPath());
+                        //Console.WriteLine("Режим сортировки данных:");
+                        //Repositiry.SortWorker(Repositiry.AddPath());
                         break;
                     case 6:
                         //Console.WriteLine("Режим просмотра данных:");

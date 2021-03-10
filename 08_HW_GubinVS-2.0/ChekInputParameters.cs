@@ -39,6 +39,20 @@ namespace _08_HW_GubinVS_2._0
 
         }
 
+        /// <summary>
+        ///  Метод принимает строку из консоли и проверяет можно преобразовать в 
+        /// </summary>
+        /// <returns></returns>
+        public static bool ChekInt(string number)
+        {
+            if (int.TryParse(number, out int newnum))
+            {
+                return true;
+            }
+            return false;
+
+        }
+
 
         /// <summary>
         /// Метод проверяет наличие файла по принимающему пути и возвращает true - при наличие файла и false -при его отсутствии
@@ -54,6 +68,21 @@ namespace _08_HW_GubinVS_2._0
             {
                 return false;
             }
+        
+        }
+
+
+        /// <summary>
+        /// Метод проверяет возможность преобразования введенных данных с консоли в дату
+        /// </summary>
+        /// <returns></returns>
+        public static bool ChekDataTime(string text)
+        {
+            if (DateTime.TryParse(text, out DateTime data))
+            {
+                return true;
+            }
+            return false;
         
         }
 
