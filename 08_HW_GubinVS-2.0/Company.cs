@@ -60,9 +60,9 @@ namespace _08_HW_GubinVS_2._0
                     Age = worker.Age,
                     Salary = worker.Salary,
                     QuantityProjects = worker.QuantityProjects,
-                    WorkerId = Guid.NewGuid()
+                    WorkerId = ChekInputParameters.ChekGuid(this.Workers, Guid.NewGuid())
                 }
-                );
+                ) ;
 
             }
             else

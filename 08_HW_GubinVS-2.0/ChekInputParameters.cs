@@ -87,5 +87,26 @@ namespace _08_HW_GubinVS_2._0
         }
 
 
+        /// <summary>
+        /// Проверка на уникальность, если уникальный то возвращает guid в противном случае генерирует новый и снова проверка
+        /// </summary>
+   
+        public static Guid ChekGuid(List<Worker> workers, Guid guid)
+        {
+            Guid newguid = Guid.NewGuid();
+            int count = workers.Count;
+            
+            for (int i = 0; i < count; i++)
+            {
+                if (workers[i].WorkerId  == guid)
+                {
+                    ChekGuid(workers, newguid);
+                }
+            }
+            return guid;
+            
+        }
+
+
     }
 }
