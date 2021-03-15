@@ -91,7 +91,7 @@ namespace _08_HW_GubinVS_2._0
         /// Проверка на уникальность, если уникальный то возвращает guid в противном случае генерирует новый и снова проверка
         /// </summary>
    
-        public static Guid ChekGuid(List<Worker> workers, Guid guid)
+        public static Guid ChekGuidWorker(List<Worker> workers, Guid guid)
         {
             Guid newguid = Guid.NewGuid();
             int count = workers.Count;
@@ -100,11 +100,33 @@ namespace _08_HW_GubinVS_2._0
             {
                 if (workers[i].WorkerId  == guid)
                 {
-                    ChekGuid(workers, newguid);
+                    ChekGuidWorker(workers, newguid);
                 }
             }
             return guid;
             
+        }
+
+        /// <summary>
+        /// Проверка на уникальность идентификатора в колллекции Departaments, если уникальный то возвращает guid 
+        /// в противном случае генерирует новый и снова проверяет до тех пор пока не будет уникальным.
+        /// </summary>
+
+        public static Guid ChekGuidDepartament(List<Departament> departaments, Guid guid)
+        {
+            Guid newguid = Guid.NewGuid();
+            int countDep = departaments.Count;
+
+            for (int i = 0; i < countDep; i++)
+            {
+                if (departaments[i].DepID == guid)
+                {
+                    ChekGuidDepartament(departaments, newguid);
+                }
+            }
+
+            return guid;
+
         }
 
 

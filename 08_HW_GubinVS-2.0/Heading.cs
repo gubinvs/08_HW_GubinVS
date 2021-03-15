@@ -33,7 +33,7 @@ namespace _08_HW_GubinVS_2._0
 
         public string namberofprojects = "Проектов";
 
-        public string id = "Идентификатор";
+       // public string id = "Идентификатор";
 
         public Heading() { }
 
@@ -52,7 +52,7 @@ namespace _08_HW_GubinVS_2._0
             Console.Write($"{this.workerquantity,15} |");
             Console.Write($"{this.salary,15} |");
             Console.Write($"{this.namberofprojects,15} |");
-            Console.Write($"{this.id,40} |");
+            //Console.Write($"{this.id,40} |");
             Console.WriteLine("\n");
         }
 

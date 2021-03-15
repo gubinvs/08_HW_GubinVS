@@ -31,5 +31,11 @@ namespace _08_HW_GubinVS_2._0
         public int QuentityWorker { get; set; }
 
 
+        /// <summary>
+        /// Идентификатор департамента
+        /// </summary>
+        public Guid DepID { get; set; }
+
+
     }
 }

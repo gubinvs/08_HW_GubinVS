@@ -60,7 +60,7 @@ namespace _08_HW_GubinVS_2._0
                     Age = worker.Age,
                     Salary = worker.Salary,
                     QuantityProjects = worker.QuantityProjects,
-                    WorkerId = ChekInputParameters.ChekGuid(this.Workers, Guid.NewGuid())
+                    WorkerId = ChekInputParameters.ChekGuidWorker(this.Workers, Guid.NewGuid())
                 }
                 ) ;
 
@@ -72,7 +72,8 @@ namespace _08_HW_GubinVS_2._0
                     new Departament()
                     {
                         DepartamentName = worker.DepartamentName,
-                        Date = new DateTime(ran.Next(2000, 2020), ran.Next(1, 12), ran.Next(28))
+                        Date = new DateTime(ran.Next(2000, 2020), ran.Next(1, 12), ran.Next(28)),
+                        DepID = ChekInputParameters.ChekGuidDepartament(this.Departaments, Guid.NewGuid())
                     });
                 this.AddWorker(
                     worker.DepartamentName, 
@@ -103,8 +104,8 @@ namespace _08_HW_GubinVS_2._0
                             Age = age,
                             Salary = salary,
                             QuantityProjects = progects,
-                            WorkerId = Guid.NewGuid()
-                        }
+                            WorkerId = ChekInputParameters.ChekGuidWorker(this.Workers, Guid.NewGuid())
+                }
                 );
           
             }
@@ -115,7 +116,8 @@ namespace _08_HW_GubinVS_2._0
                     new Departament()
                     {
                         DepartamentName = depname,
-                        Date = new DateTime (ran.Next(2000,2020), ran.Next(1,12), ran.Next(28))
+                        Date = new DateTime (ran.Next(2000,2020), ran.Next(1,12), ran.Next(28)),
+                        DepID = ChekInputParameters.ChekGuidDepartament(this.Departaments, Guid.NewGuid())
                     });
                 this.AddWorker(depname, surname, name, age, salary, progects);
             }
@@ -132,8 +134,10 @@ namespace _08_HW_GubinVS_2._0
                 new Departament()
                     {
                         DepartamentName = depname,
-                        Date = date
-                    }
+                        Date = date,
+                        DepID = ChekInputParameters.ChekGuidDepartament(this.Departaments, Guid.NewGuid())
+
+                }
                 );
         }
 
@@ -215,7 +219,7 @@ namespace _08_HW_GubinVS_2._0
                 Console.Write($"{ChekQuentityWorker(this.Workers[i].DepartamentName),15} |");  // Кол-во сотрудников в департаменте
                 Console.Write($"{this.Workers[i].Salary, 15} |");
                 Console.Write($"{this.Workers[i].QuantityProjects, 15} |");
-                Console.Write($"{this.Workers[i].WorkerId, 40} |");
+                //Console.Write($"{this.Workers[i].WorkerId, 40} |");
                 Console.WriteLine();
             }
         }
@@ -223,8 +227,7 @@ namespace _08_HW_GubinVS_2._0
         /// <summary>
         /// Метод определяет есть в базе данных такой департамент или нет
         /// </summary>
-        /// <param name="worker"></param>
-        /// <returns></returns>
+
         public bool ChekDepName(string depname)
         {
             return this.Departaments.Exists(x => x.DepartamentName.Contains(depname));
@@ -233,8 +236,7 @@ namespace _08_HW_GubinVS_2._0
         /// <summary>
         /// Метод возвращает индекс первого вхождения искомого департамента
         /// </summary>
-        /// <param name="depname">Наименование департамена у которого определяется индекс</param>
-        /// <returns></returns>
+
         public int ChekDepIndex(string depname)
         {
             int count = this.Departaments.Count;
