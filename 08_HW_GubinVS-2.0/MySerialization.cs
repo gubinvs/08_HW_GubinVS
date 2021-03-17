@@ -36,6 +36,7 @@ namespace _08_HW_GubinVS_2._0
         /// </summary>
         public static void SerializeXML(string path, Company company)
         {
+            File.Delete(path);
             XmlSerializer xml = new XmlSerializer(typeof(Company));
             using (Stream str = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
             {

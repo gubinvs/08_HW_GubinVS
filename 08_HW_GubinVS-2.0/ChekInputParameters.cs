@@ -154,7 +154,7 @@ namespace _08_HW_GubinVS_2._0
         /// и возвращает индекс первого вхождения. Если соответствий не найдено возвращает -1ю
         /// </summary>
       
-        public static int ChekDepID(List<Departament> dep, string depname)
+        public static int ChekDepIndex(List<Departament> dep, string depname)
         {
             
             int countDep = dep.Count;
@@ -173,7 +173,7 @@ namespace _08_HW_GubinVS_2._0
 
 
         /// <summary>
-        /// Метод принимает название департамента и коллекцию департаментов, проверяет коллекцию департамента на наличие 
+        /// Метод принимает название департамента , проверяет коллекцию департамента на наличие 
         /// соответствия и если соответствие есть возвращает true, в противном случае false
         /// </summary>
         
@@ -190,6 +190,44 @@ namespace _08_HW_GubinVS_2._0
             }
             return false;
 
+        }
+
+        /// <summary>
+        /// Метод принимает колллекцию сотрудников и наза=вание департамента,  возвращает индекс первого вхождения названия департамента
+        /// </summary>
+
+        public static int ChekWorkerIndex(List<Worker> worker, string depname)
+        {
+
+            int countDep = worker.Count;
+
+            for (int i = 0; i < countDep; i++)
+            {
+                if (worker[i].DepartamentName == depname)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Метод принимает колллекцию сотрудников и название департамента,  возвращает true если такие есть и false в противном случае
+        /// </summary>
+
+        public static bool ChekWorkerDep(List<Worker> worker, string depname)
+        {
+
+            int countDep = worker.Count;
+
+            for (int i = 0; i < countDep; i++)
+            {
+                if (worker[i].DepartamentName == depname)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
 

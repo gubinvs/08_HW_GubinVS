@@ -21,16 +21,17 @@ namespace _08_HW_GubinVS_2._0
             head.PrintHeading();
 
             // Заполнение данных о сотрудниках
-            Company com = new Company();
+            Company company = new Company();
             for (uint i = 0; i < number; i++)
             {
-                com.AddRandomWorker(new Filling().StringWorker(), new Filling().IntWorker());
+                company.AddRandomWorker(new Filling().StringWorker(), new Filling().IntWorker());
             }
             //Печать данных в консоль
-            com.PrintCompany();
-            // Сериализация данных в файл XML
-            MySerialization.SerializeXML(path, com);
-          
+            company.PrintCompany();
+
+            // Сохранение обновленных данных в файл
+            MySerialization.SerializeXML(path, company);
+
         }
 
         /// <summary>
@@ -156,9 +157,9 @@ namespace _08_HW_GubinVS_2._0
             // Печать обновленных данных в консоль
             company.PrintCompany();
 
-            // Сериализация новых данных в файлы xml и jason
+            // Сохранение обновленных данных в файл
             MySerialization.SerializeXML(path, company);
-            
+
         }
 
         /// <summary>
@@ -204,9 +205,9 @@ namespace _08_HW_GubinVS_2._0
             // Печать обновленных данных в консоль
             company.PrintCompany();
 
-            // Сериализация новых данных в файлы xml
+            // Сохранение обновленных данных в файл
             MySerialization.SerializeXML(path, company);
-           
+
         }
 
         /// <summary>
@@ -426,7 +427,7 @@ namespace _08_HW_GubinVS_2._0
             // Печать обновленных данных в консоль
             company.PrintCompany();
 
-            // Сериализация новых данных в файлы xml
+            // Сохранение обновленных данных в файл
             MySerialization.SerializeXML(path, company);
         }
 

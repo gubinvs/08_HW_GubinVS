@@ -107,7 +107,7 @@ namespace _08_HW_GubinVS_2._0
                     Salary = salary,
                     QuantityProjects = progects,
                     WorkerId = ChekInputParameters.ChekGuidWorker(this.Workers, Guid.NewGuid()),
-                    DepartamentID = this.Departaments[ChekInputParameters.ChekDepID(this.Departaments, depname)].DepartamentID
+                    DepartamentID = this.Departaments[ChekInputParameters.ChekDepIndex(this.Departaments, depname)].DepartamentID
                 });
             }
             else
@@ -279,9 +279,24 @@ namespace _08_HW_GubinVS_2._0
         /// <param name="depname"></param>
         public void DeleteDep(string depname)
         {
-            this.Departaments.RemoveAll(x => x.DepartamentName == depname);
-            this.Workers.RemoveAll(x => x.DepartamentName == depname);
+        
+            // Удаление из коллекции департамент с входящим названием
+            this.Departaments.RemoveAt(ChekInputParameters.ChekDepIndex(this.Departaments, depname));
+            do
+            {
+                DeleteWorkerDepname(ChekInputParameters.ChekWorkerIndex(this.Workers, depname));
 
+            } while (ChekInputParameters.ChekWorkerDep(this.Workers, depname));
+           
+        }
+
+        /// <summary>
+        /// Метод принимает название департамента и удаляет из коллекции сотрудника с таким департаментом
+        /// </summary>
+       
+        public void DeleteWorkerDepname(int index)
+        {
+            this.Workers.RemoveAt(index);
         }
 
         /// <summary>
