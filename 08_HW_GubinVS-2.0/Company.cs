@@ -229,10 +229,10 @@ namespace _08_HW_GubinVS_2._0
         ///// Метод определяет есть в базе данных такой департамент или нет
         ///// </summary>
 
-        //public bool ChekDepName(string depname)
-        //{
-        //    return this.Departaments.Exists(x => x.DepartamentName.Contains(depname));
-        //}
+        public bool ChekDepID(Guid guid)
+        {
+            return this.Departaments.Exists(x => x.DepartamentID.Equals(guid));
+        }
 
         /// <summary>
         /// Метод возвращает индекс первого вхождения искомого департамента
