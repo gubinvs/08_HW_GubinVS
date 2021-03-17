@@ -9,6 +9,13 @@ namespace _08_HW_GubinVS_2._0
 
     public class Departament
     {
+
+
+        /// <summary>
+        /// Идентификатор guid департамента
+        /// </summary>
+        public Guid DepartamentID { get; set; }
+
         /// <summary>
         /// Наименование департамента
         /// </summary>
@@ -24,18 +31,11 @@ namespace _08_HW_GubinVS_2._0
         /// </summary>
         public DateTime Date { get; set; }
 
-
         /// <summary>
         /// Количество сотрудников в департаменте
         /// </summary>
         public int QuentityWorker { get; set; }
 
-
-        /// <summary>
-        /// Идентификатор департамента
-        /// </summary>
-        public Guid DepID { get; set; }
-
-
+     
     }
 }

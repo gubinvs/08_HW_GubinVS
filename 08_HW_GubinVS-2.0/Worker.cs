@@ -49,6 +49,11 @@ namespace _08_HW_GubinVS_2._0
         /// </summary>
         public Guid WorkerId { get; set; }
 
+        /// <summary>
+        /// Идентификотор департамента к которому приписан сотрудник
+        /// </summary>
+        public Guid DepartamentID { get; set; }
+
 
         public Worker() 
         { 

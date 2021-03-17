@@ -119,13 +119,76 @@ namespace _08_HW_GubinVS_2._0
 
             for (int i = 0; i < countDep; i++)
             {
-                if (departaments[i].DepID == guid)
+                if (departaments[i].DepartamentID == guid)
                 {
                     ChekGuidDepartament(departaments, newguid);
                 }
             }
-
             return guid;
+
+        }
+
+        /// <summary>
+        /// Метод проверяет есть такой идентификатор департамента с коллекции или нет, если да, в противном случае нет
+        /// </summary>
+      
+        public static bool ChekDepID(List<Departament> departaments, Worker worker)
+        {
+           
+            int countDep = departaments.Count;
+
+            for (int i = 0; i < countDep; i++)
+            {
+                if (departaments[i].DepartamentID == worker.DepartamentID)
+                {
+                    return true;
+                }
+            }
+            return false;
+
+        }
+
+
+        /// <summary>
+        /// Метод принимает название департамента и коллекцию департаментов, ищет соответствие по названию 
+        /// и возвращает индекс первого вхождения. Если соответствий не найдено возвращает -1ю
+        /// </summary>
+      
+        public static int ChekDepID(List<Departament> dep, string depname)
+        {
+            
+            int countDep = dep.Count;
+
+            for (int i = 0; i < countDep; i++)
+            {
+                if (dep[i].DepartamentName == depname)
+                {
+                    return i;
+                }
+            }
+            return -1;
+            
+
+        }
+
+
+        /// <summary>
+        /// Метод принимает название департамента и коллекцию департаментов, проверяет коллекцию департамента на наличие 
+        /// соответствия и если соответствие есть возвращает true, в противном случае false
+        /// </summary>
+        
+        public static bool ChekDepName(List<Departament> dep, string depname)
+        {
+            int countDep = dep.Count;
+
+            for (int i = 0; i < countDep; i++)
+            {
+                if (dep[i].DepartamentName == depname)
+                {
+                    return true;
+                }
+            }
+            return false;
 
         }
 

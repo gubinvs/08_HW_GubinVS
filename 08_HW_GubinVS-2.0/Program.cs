@@ -94,8 +94,6 @@ namespace _08_HW_GubinVS_2._0
         ///  5   Имя_5     Фамилия_5          22         Отдел_2            20000                      3 
         /// 
 
-
-
         static void Main(string[] args)
         {
            

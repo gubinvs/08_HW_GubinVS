@@ -204,7 +204,7 @@ namespace _08_HW_GubinVS_2._0
             // Печать обновленных данных в консоль
             company.PrintCompany();
 
-            // Сериализация новых данных в файлы xml и jason
+            // Сериализация новых данных в файлы xml
             MySerialization.SerializeXML(path, company);
            
         }

@@ -49,18 +49,21 @@ namespace _08_HW_GubinVS_2._0
         public void AddWorker(Worker worker)
         {
             // если такой департамент есть в базе, добавляется сотрудник, если нет добавляется департамент
-            if (ChekDepName(worker.DepartamentName))
+            if (ChekInputParameters.ChekDepID(this.Departaments, worker)) // Проверить идентификатор департамента 
+                //сотрудника на наличие такого департамента с аналогичным идентификатором
             {
                 this.Workers.Add(new Worker()
                 {
-                    Number = this.Workers.Count + 1,
+                    Number = this.Workers.Count + 1, // Номер по порядку
                     DepartamentName = worker.DepartamentName,
                     SurName = worker.SurName,
                     Name = worker.Name,
                     Age = worker.Age,
                     Salary = worker.Salary,
                     QuantityProjects = worker.QuantityProjects,
-                    WorkerId = ChekInputParameters.ChekGuidWorker(this.Workers, Guid.NewGuid())
+                    WorkerId = ChekInputParameters.ChekGuidWorker(this.Workers, Guid.NewGuid()),
+                    DepartamentID = worker.DepartamentID
+                    
                 }
                 ) ;
 
@@ -73,7 +76,7 @@ namespace _08_HW_GubinVS_2._0
                     {
                         DepartamentName = worker.DepartamentName,
                         Date = new DateTime(ran.Next(2000, 2020), ran.Next(1, 12), ran.Next(28)),
-                        DepID = ChekInputParameters.ChekGuidDepartament(this.Departaments, Guid.NewGuid())
+                        DepartamentID = ChekInputParameters.ChekGuidDepartament(this.Departaments, Guid.NewGuid())
                     });
                 this.AddWorker(
                     worker.DepartamentName, 
@@ -82,61 +85,59 @@ namespace _08_HW_GubinVS_2._0
                     worker.Age, 
                     worker.Salary,
                     worker.QuantityProjects
+                    
                     );
             }
         }
 
         /// <summary>
-        /// Метод принимает кол-во сотрудников которых необходимо создать.
+        /// Метод принимает строковые поля класса, для создания сотрудника
         /// </summary>
-        /// <param name="depname">Наименование департамента</param>
         public void AddWorker(string depname, string surname, string name, int age, int salary, int progects)
         {
-            // если такой департамент есть в базе, добавляется сотрудник, если нет добавляется департамент
-            if (ChekDepName(depname)) 
+            if (ChekInputParameters.ChekDepName(this.Departaments, depname)) // если такой департамент есть
             {
-                this.Workers.Add(new Worker() 
-                        {
-                            Number = this.Workers.Count+1,
-                            DepartamentName = depname,
-                            SurName = surname,
-                            Name = name,
-                            Age = age,
-                            Salary = salary,
-                            QuantityProjects = progects,
-                            WorkerId = ChekInputParameters.ChekGuidWorker(this.Workers, Guid.NewGuid())
-                }
-                );
-          
+                this.Workers.Add(new Worker()
+                {
+                    Number = this.Workers.Count + 1,
+                    DepartamentName = depname,
+                    SurName = surname,
+                    Name = name,
+                    Age = age,
+                    Salary = salary,
+                    QuantityProjects = progects,
+                    WorkerId = ChekInputParameters.ChekGuidWorker(this.Workers, Guid.NewGuid()),
+                    DepartamentID = this.Departaments[ChekInputParameters.ChekDepID(this.Departaments, depname)].DepartamentID
+                });
             }
             else
             {
-                Random ran = new Random();
-                this.Departaments.Add(
-                    new Departament()
-                    {
-                        DepartamentName = depname,
-                        Date = new DateTime (ran.Next(2000,2020), ran.Next(1,12), ran.Next(28)),
-                        DepID = ChekInputParameters.ChekGuidDepartament(this.Departaments, Guid.NewGuid())
-                    });
-                this.AddWorker(depname, surname, name, age, salary, progects);
+                    Random ran = new Random();
+                    this.Departaments.Add(
+                        new Departament()
+                        {
+                            DepartamentName = depname,
+                            Date = new DateTime(ran.Next(2000, 2020), ran.Next(1, 12), ran.Next(28)),
+                            DepartamentID = ChekInputParameters.ChekGuidDepartament(this.Departaments, Guid.NewGuid())
+                        });
+                    AddWorker(depname, surname, name, age, salary, progects);
+
             }
+            
         }
+
 
         /// <summary>
         /// Метод добавления департамента
         /// </summary>
-        /// <param name="depname">Наименование департамента</param>
-        /// <param name="date">Дата</param>
         public void AddDepartament(string depname, DateTime date)
         {
             this.Departaments.Add(
                 new Departament()
-                    {
-                        DepartamentName = depname,
-                        Date = date,
-                        DepID = ChekInputParameters.ChekGuidDepartament(this.Departaments, Guid.NewGuid())
-
+                {
+                     DepartamentName = depname,
+                     Date = date,
+                     DepartamentID = ChekInputParameters.ChekGuidDepartament(this.Departaments, Guid.NewGuid())
                 }
                 );
         }
@@ -224,14 +225,14 @@ namespace _08_HW_GubinVS_2._0
             }
         }
 
-        /// <summary>
-        /// Метод определяет есть в базе данных такой департамент или нет
-        /// </summary>
+        ///// <summary>
+        ///// Метод определяет есть в базе данных такой департамент или нет
+        ///// </summary>
 
-        public bool ChekDepName(string depname)
-        {
-            return this.Departaments.Exists(x => x.DepartamentName.Contains(depname));
-        }
+        //public bool ChekDepName(string depname)
+        //{
+        //    return this.Departaments.Exists(x => x.DepartamentName.Contains(depname));
+        //}
 
         /// <summary>
         /// Метод возвращает индекс первого вхождения искомого департамента
